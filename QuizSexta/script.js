@@ -10,7 +10,7 @@ const questions = [
     },
     {
         question: "Qual é o maior planeta do sistema Solar?",
-        options: ["Tera", "Júpter", "Marte", "Saturno"],
+        options: ["Terra", "Júpter", "Marte", "Saturno"],
         answer: "Júpter"
     },
     {
@@ -32,14 +32,35 @@ function showQuestion(question)
         <div>
             <h2>${question.question}</h2>
             ${
+                // Recebe a resposta escolhida com um click em forma de texto
                 question.options.map(
                     (option, index) =>`
-                        <button class="option-btn">${option}</button>
+                        <button class="option-btn" onclick="selectOption('${option}')">${option}</button>
                     `
                 ).join('')
             }
         </div>        
-`;
+    `;
+
+}
+
+function selectOption(selectedOption) {
+    console.log(selectedOption);
+    const question = questions[currentQuestionIndex];
+    console.log(question);
+    if (selectedOption === question.answer) {
+        alert("Correto!");
+    } else {
+        alert("Errado! A resposta correta é: " + question.answer);
+    }
+    console.log(currentQuestionIndex);
+    currentQuestionIndex++;
+    console.log(currentQuestionIndex);
+    if(currentQuestionIndex < questions.length) {
+        showQuestion(questions[currentQuestionIndex]);
+    } else {
+        alert("Quiz completo!");
+    }
 }
 
 showQuestion(questions[currentQuestionIndex]);
